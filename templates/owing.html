@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=entries>
+  {% for entry in entries %}
+    <li>
+        {{ entry.user }}: ${{ entry.cost }}
+  {% endfor %}
+  </ul>
+{% endblock %}

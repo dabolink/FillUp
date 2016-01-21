@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <div>
+    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+      <dl>
+        <dt>Start:
+        <dd><input type=number size=5 name=start value="{{ milages.0 }}">
+        <dt>End:
+        <dd><input type="number" size=5 name="end" value="{{ milages.1 }}">
+        <dt>Fill Up?</dt>
+        <dd><input type="checkbox" name="fillup" value="off"></dd>
+        <dt>liters</dt>
+        <dd><input type="number" name="liters" step="any" min="0"></dd>
+        <dt>total cost</dt>
+        <dd><input type="number" name="price" step="any" min="0"></dd>
+        <dd><input type=submit value=enter>
+      </dl>
+    </form>
+<!--
+    <form action="{{ url_for('calc_fillup') }}" method="POST" class="add-entry">
+        <dl>
+            <dt>
+                Fillup Date:
+                <select name="date">
+                        {% for date in fill_dates %}
+                        <option value="{{ date }}">{{ date }}</option>
+                        {% endfor %}
+                </select>
+                <button type="submit">Calculate!</button>
+            </dt>
+        </dl>
+    </form>
+    -->
+    </div>
+  {% endif %}
+  <ul class=entries>
+  {% for entry in entries %}
+    <li>
+        <h2>{{ entry.title }} </h2>
+        <span> {{ entry.owner }} </span>
+        {{ entry.start }} --> {{ entry.ending }}
+  {% else %}
+    <li><em>No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
